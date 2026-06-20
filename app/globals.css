@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
+@theme {
+  /* Brand palette */
+  --color-gold: #c5a45d;
+  --color-gold-light: #ddc492;
+  --color-gold-dark: #a8863f;
+  --color-ember: #cc2803;
+  --color-ember-dark: #a81f02;
+
+  --color-ink: #211b12;
+  --color-ink-soft: #4a4031;
+  --color-cream: #faf6ee;
+  --color-sand: #f2e9d8;
+
+  --color-background: #ffffff;
+  --color-foreground: #211b12;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+
+  --shadow-soft: 0 10px 40px -12px rgba(33, 27, 18, 0.18);
+  --shadow-card: 0 18px 50px -20px rgba(33, 27, 18, 0.28);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.9s ease both;
+  --animate-kenburns: kenburns 18s ease-out infinite alternate;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes kenburns {
+  from { transform: scale(1) translate(0, 0); }
+  to { transform: scale(1.12) translate(-1%, -1%); }
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #211b12;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Utility: section eyebrow label */
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-gold-dark);
+}
+
+/* Reveal-on-scroll helper (used with IntersectionObserver) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #fff;
 }
