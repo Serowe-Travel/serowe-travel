@@ -72,7 +72,10 @@ export function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2.5 lg:flex">
+          <Button href="/login" variant="outline" size="sm">
+            Login
+          </Button>
           <Button href="/contact" variant="ember" size="sm">
             Plan Your Trip
           </Button>
@@ -105,7 +108,10 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Button href="/contact" variant="ember" className="mt-4 mb-2 w-full">
+          <Button href="/login" variant="outline" className="mt-4 w-full">
+            Login
+          </Button>
+          <Button href="/contact" variant="ember" className="mt-2 mb-2 w-full">
             Plan Your Trip
           </Button>
         </nav>

@@ -124,11 +124,30 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-cream/15 pt-6 text-xs text-cream/50 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream/15 pt-6 text-xs text-cream/50 sm:flex-row">
           <p>
             © {new Date().getFullYear()} Serowe Travel. All rights reserved.
           </p>
-          <p>Explore Botswana &amp; Beyond.</p>
+          <div className="flex items-center gap-2.5">
+            <span className="uppercase tracking-widest text-cream/60">
+              Developer:
+            </span>
+            <a
+              href="https://blueappstechnology.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="BlueApps Technology"
+              className="inline-flex h-14 w-[164px] items-center justify-center rounded-lg bg-white px-1.5 transition-opacity hover:opacity-90"
+            >
+              <Image
+                src="/blueapps.png"
+                alt="BlueApps Technology"
+                width={220}
+                height={76}
+                className="h-11 w-auto object-contain"
+              />
+            </a>
+          </div>
         </div>
       </Container>
     </footer>
