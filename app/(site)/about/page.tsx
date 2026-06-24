@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { companyValues } from "@/lib/site";
+import { getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -14,14 +15,15 @@ export const metadata: Metadata = {
     "Established in 2013, Serowe Travel is an independent, IATA-accredited travel agency rooted in Botswana's Central Region, specialising in luxury and sustainable travel.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const images = await getSiteImages();
   return (
     <>
       <PageHero
         eyebrow="About Serowe Travel"
         title="Local expertise, global connections"
         subtitle="A service-oriented travel company branding Botswana's Central Region as a destination of choice."
-        image="/images/gallery/cultural-performer.jpg"
+        image={images.page_hero_about}
       />
 
       {/* Our story */}
@@ -31,7 +33,7 @@ export default function AboutPage() {
             <Reveal>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-card">
                 <Image
-                  src="/images/gallery/delta-camp-aerial.jpg"
+                  src={images.about_story}
                   alt="Aerial view of a delta camp"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

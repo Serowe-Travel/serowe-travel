@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentProfile } from "@/lib/auth";
+import { getSiteImages } from "@/lib/queries";
 import { Sidebar } from "@/components/admin/Sidebar";
 
 export default async function AdminLayout({
@@ -12,10 +13,11 @@ export default async function AdminLayout({
 
   const name = profile?.full_name || user.email || "Staff";
   const role = profile?.role || "staff";
+  const images = await getSiteImages();
 
   return (
     <div className="flex min-h-screen flex-col bg-cream lg:flex-row">
-      <Sidebar name={name} role={role} />
+      <Sidebar name={name} role={role} logoSrc={images.logo} />
       <main className="flex-1 overflow-x-hidden">
         <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8">{children}</div>
       </main>

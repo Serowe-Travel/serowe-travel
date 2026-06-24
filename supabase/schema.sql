@@ -63,6 +63,16 @@ returns boolean language sql stable security definer set search_path = public as
   );
 $$;
 
+-- Is the current user an admin? SECURITY DEFINER so it can be used inside
+-- profiles policies without causing RLS recursion.
+create or replace function public.is_admin()
+returns boolean language sql stable security definer set search_path = public as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;
+
 -- =====================================================================
 -- packages
 -- =====================================================================
@@ -141,24 +151,62 @@ create trigger site_settings_updated_at
   for each row execute function public.set_updated_at();
 
 -- =====================================================================
+-- site_images (admin-editable website imagery, keyed by named slot)
+-- A row exists only for slots that have been overridden in the admin.
+-- Components fall back to the bundled static asset when a slot is absent.
+-- =====================================================================
+create table if not exists public.site_images (
+  slot text primary key,
+  url text not null,
+  alt text,
+  updated_at timestamptz not null default now()
+);
+
+create trigger site_images_updated_at
+  before update on public.site_images
+  for each row execute function public.set_updated_at();
+
+-- =====================================================================
+-- airlines (editable carousel shown on the public /airlines page)
+-- =====================================================================
+create table if not exists public.airlines (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  logo_url text not null,
+  link_url text,
+  description text,
+  sort_order int not null default 0,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists airlines_sort_idx
+  on public.airlines(sort_order, created_at);
+
+create trigger airlines_updated_at
+  before update on public.airlines
+  for each row execute function public.set_updated_at();
+
+-- =====================================================================
 -- Row Level Security
 -- =====================================================================
 alter table public.profiles      enable row level security;
 alter table public.packages      enable row level security;
 alter table public.enquiries     enable row level security;
 alter table public.site_settings enable row level security;
+alter table public.site_images   enable row level security;
+alter table public.airlines      enable row level security;
 
 -- profiles ----------------------------------------------------------
 create policy "profiles: read own" on public.profiles
   for select using (auth.uid() = id);
 create policy "profiles: admin read all" on public.profiles
-  for select using (exists (
-    select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+  for select using (public.is_admin());
 create policy "profiles: update own" on public.profiles
   for update using (auth.uid() = id);
 create policy "profiles: admin manage" on public.profiles
-  for all using (exists (
-    select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+  for all using (public.is_admin()) with check (public.is_admin());
 
 -- packages ----------------------------------------------------------
 create policy "packages: public read published" on public.packages
@@ -186,6 +234,18 @@ create policy "settings: public read" on public.site_settings
 create policy "settings: admin update" on public.site_settings
   for update using (exists (
     select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- site_images -------------------------------------------------------
+create policy "site_images: public read" on public.site_images
+  for select using (true);
+create policy "site_images: staff write" on public.site_images
+  for all using (public.can_write()) with check (public.can_write());
+
+-- airlines ----------------------------------------------------------
+create policy "airlines: public read active" on public.airlines
+  for select using (is_active or public.is_staff());
+create policy "airlines: staff write" on public.airlines
+  for all using (public.can_write()) with check (public.can_write());
 
 -- =====================================================================
 -- Storage bucket: package-images (public read, staff write)

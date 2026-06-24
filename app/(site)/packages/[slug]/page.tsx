@@ -12,7 +12,7 @@ import {
 import { PageHero } from "@/components/site/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { getPackageBySlug } from "@/lib/queries";
+import { getPackageBySlug, getSiteImages } from "@/lib/queries";
 import { formatPrice } from "@/lib/utils";
 
 export async function generateMetadata({
@@ -38,6 +38,7 @@ export default async function PackageDetailPage({
   const pkg = await getPackageBySlug(slug);
   if (!pkg) notFound();
 
+  const images = await getSiteImages();
   const price = formatPrice(pkg.price, pkg.price_currency);
   const gallery = (pkg.gallery_images ?? []).filter(Boolean);
 
@@ -47,7 +48,7 @@ export default async function PackageDetailPage({
         eyebrow={pkg.destination}
         title={pkg.title}
         subtitle={pkg.duration ?? undefined}
-        image={pkg.featured_image ?? "/images/hero/tented-camp.png"}
+        image={pkg.featured_image ?? images.page_hero_packages}
       />
 
       <section className="py-20">

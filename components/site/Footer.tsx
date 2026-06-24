@@ -10,7 +10,7 @@ import {
 } from "@/components/site/SocialIcons";
 import { getSiteSettings } from "@/lib/queries";
 
-export async function Footer() {
+export async function Footer({ logoSrc }: { logoSrc: string }) {
   const settings = await getSiteSettings();
   const socials = [
     { href: settings.facebook_url, Icon: FacebookIcon, label: "Facebook" },
@@ -26,7 +26,7 @@ export async function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3">
               <Image
-                src="/images/brand/logo.png"
+                src={logoSrc}
                 alt="Serowe Travel"
                 width={48}
                 height={48}

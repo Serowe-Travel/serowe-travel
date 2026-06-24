@@ -6,13 +6,14 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-const SLIDES = [
+const FALLBACK_SLIDES = [
   "/images/hero/elephant-river.png",
   "/images/hero/tented-camp.png",
   "/images/hero/mokoro-delta.png",
 ];
 
-export function Hero() {
+export function Hero({ slides }: { slides?: string[] }) {
+  const SLIDES = slides && slides.length > 0 ? slides : FALLBACK_SLIDES;
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export function Hero() {
       6000,
     );
     return () => clearInterval(id);
-  }, []);
+  }, [SLIDES.length]);
 
   return (
     <section className="relative flex min-h-[88vh] items-center overflow-hidden">

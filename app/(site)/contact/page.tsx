@@ -5,6 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/site/ContactForm";
 import { site } from "@/lib/site";
+import { getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
     "Get in touch with Serowe Travel for general enquiries, package requests and corporate travel management. Call, email or send us a message.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const images = await getSiteImages();
   return (
     <>
       <PageHero
         eyebrow="Contact Us"
         title="Let's plan your next journey"
         subtitle="General enquiries, package requests or corporate travel — we're here to help."
-        image="/images/gallery/sunset-game-drive.jpg"
+        image={images.page_hero_contact}
       />
 
       <section className="py-24">

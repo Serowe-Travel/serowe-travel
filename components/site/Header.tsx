@@ -9,7 +9,7 @@ import { mainNav } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-export function Header() {
+export function Header({ logoSrc }: { logoSrc: string }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -21,10 +21,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   return (
     <header
       className={cn(
@@ -34,10 +30,10 @@ export function Header() {
           : "bg-white/70 backdrop-blur-sm",
       )}
     >
-      <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/images/brand/logo.png"
+            src={logoSrc}
             alt="Serowe Travel"
             width={52}
             height={52}
@@ -49,7 +45,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {mainNav.map((item) => {
             const active =
               item.href === "/"
@@ -60,7 +56,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-gold after:transition-all after:duration-300",
+                  "relative whitespace-nowrap text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-gold after:transition-all after:duration-300",
                   active
                     ? "text-gold-dark after:w-full"
                     : "text-ink-soft hover:text-ink after:w-0 hover:after:w-full",
@@ -72,7 +68,7 @@ export function Header() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2.5 lg:flex">
+        <div className="hidden items-center gap-2.5 xl:flex">
           <Button href="/login" variant="outline" size="sm">
             Login
           </Button>
@@ -85,7 +81,7 @@ export function Header() {
           type="button"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden p-2 text-ink"
+          className="xl:hidden p-2 text-ink"
         >
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
@@ -94,8 +90,8 @@ export function Header() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "lg:hidden overflow-hidden border-t border-sand bg-white transition-[max-height] duration-300",
-          open ? "max-h-[420px]" : "max-h-0 border-t-0",
+          "xl:hidden overflow-hidden border-t border-sand bg-white transition-[max-height] duration-300",
+          open ? "max-h-[560px]" : "max-h-0 border-t-0",
         )}
       >
         <nav className="flex flex-col px-5 py-3">
@@ -103,15 +99,26 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setOpen(false)}
               className="py-3 text-base font-medium text-ink-soft hover:text-gold-dark border-b border-sand/60 last:border-0"
             >
               {item.label}
             </Link>
           ))}
-          <Button href="/login" variant="outline" className="mt-4 w-full">
+          <Button
+            href="/login"
+            variant="outline"
+            className="mt-4 w-full"
+            onClick={() => setOpen(false)}
+          >
             Login
           </Button>
-          <Button href="/contact" variant="ember" className="mt-2 mb-2 w-full">
+          <Button
+            href="/contact"
+            variant="ember"
+            className="mt-2 mb-2 w-full"
+            onClick={() => setOpen(false)}
+          >
             Plan Your Trip
           </Button>
         </nav>

@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { destinations } from "@/lib/site";
+import { getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Destinations",
@@ -15,14 +16,15 @@ export const metadata: Metadata = {
     "Discover Botswana, the SADC region and international destinations including Mauritius, Florida, Thailand and Indonesia with Serowe Travel.",
 };
 
-export default function DestinationsPage() {
+export default async function DestinationsPage() {
+  const images = await getSiteImages();
   return (
     <>
       <PageHero
         eyebrow="Destinations"
         title="The world, expertly arranged"
         subtitle="From the heart of Botswana to islands and wellness retreats across the globe."
-        image="/images/hero/mokoro-delta.png"
+        image={images.page_hero_destinations}
       />
 
       <section className="py-24">
@@ -48,7 +50,7 @@ export default function DestinationsPage() {
                     )}
                   >
                     <Image
-                      src={d.image}
+                      src={images[d.imageSlot]}
                       alt={d.region}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"

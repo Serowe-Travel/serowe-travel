@@ -66,3 +66,22 @@ export type SiteSettings = {
   linkedin_url: string | null;
   updated_at: string;
 };
+
+export type SiteImage = {
+  slot: string;
+  url: string;
+  alt: string | null;
+  updated_at: string;
+};
+
+export type Airline = {
+  id: string;
+  name: string;
+  logo_url: string;
+  link_url: string | null;
+  description: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};

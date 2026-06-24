@@ -1,16 +1,19 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { getSiteImages } from "@/lib/queries";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const images = await getSiteImages();
+
   return (
     <>
-      <Header />
+      <Header logoSrc={images.logo} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer logoSrc={images.logo} />
     </>
   );
 }

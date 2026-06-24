@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import {
   Award,
@@ -15,7 +14,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { valueProps, services, destinations } from "@/lib/site";
-import { getFeaturedPackages } from "@/lib/queries";
+import { getFeaturedPackages, getSiteImages } from "@/lib/queries";
 
 const VP_ICON = {
   badge: Award,
@@ -24,11 +23,14 @@ const VP_ICON = {
 } as const;
 
 export default async function HomePage() {
-  const featured = await getFeaturedPackages(3);
+  const [featured, images] = await Promise.all([
+    getFeaturedPackages(3),
+    getSiteImages(),
+  ]);
 
   return (
     <>
-      <Hero />
+      <Hero slides={[images.hero_1, images.hero_2, images.hero_3]} />
 
       {/* Value propositions */}
       <section className="relative -mt-16 z-20">
@@ -65,7 +67,7 @@ export default async function HomePage() {
             <Reveal className="relative">
               <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card">
                 <Image
-                  src="/images/gallery/heritage-homestead.jpg"
+                  src={images.home_about}
                   alt="Heritage homestead in the Central Region"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -127,7 +129,7 @@ export default async function HomePage() {
               >
                 <div className="relative h-44 overflow-hidden">
                   <Image
-                    src={svc.image}
+                    src={images[svc.imageSlot]}
                     alt={svc.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
@@ -206,7 +208,7 @@ export default async function HomePage() {
               >
                 <div className="relative aspect-[3/4]">
                   <Image
-                    src={d.image}
+                    src={images[d.imageSlot]}
                     alt={d.region}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -236,7 +238,7 @@ export default async function HomePage() {
       {/* CTA band */}
       <section className="relative overflow-hidden py-24">
         <Image
-          src="/images/hero/safari-vehicle.png"
+          src={images.home_cta}
           alt=""
           fill
           sizes="100vw"

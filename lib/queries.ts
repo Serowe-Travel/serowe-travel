@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import type { Package, SiteSettings } from "@/lib/types";
+import type { Airline, Package, SiteImage, SiteSettings } from "@/lib/types";
+import { FALLBACK_IMAGES, type SiteImageMap } from "@/lib/site-images";
 
 /** Published packages for the public site. Empty when not configured. */
 export async function getPublishedPackages(): Promise<Package[]> {
@@ -66,5 +67,63 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     return (data as SiteSettings) ?? DEFAULT_SETTINGS;
   } catch {
     return DEFAULT_SETTINGS;
+  }
+}
+
+/**
+ * Resolved map of every image slot to a usable URL. Starts from the bundled
+ * fallbacks and overlays any admin-uploaded overrides from `site_images`.
+ */
+export async function getSiteImages(): Promise<SiteImageMap> {
+  const map: SiteImageMap = { ...FALLBACK_IMAGES };
+  if (!isSupabaseConfigured) return map;
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("site_images")
+      .select("slot,url");
+    if (error) throw error;
+    for (const row of (data as Pick<SiteImage, "slot" | "url">[]) ?? []) {
+      if (row.url) map[row.slot] = row.url;
+    }
+    return map;
+  } catch {
+    return map;
+  }
+}
+
+/** Raw rows from `site_images` (admin overrides only), keyed by slot. */
+export async function getSiteImageOverrides(): Promise<
+  Record<string, SiteImage>
+> {
+  if (!isSupabaseConfigured) return {};
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.from("site_images").select("*");
+    if (error) throw error;
+    const out: Record<string, SiteImage> = {};
+    for (const row of (data as SiteImage[]) ?? []) out[row.slot] = row;
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+/** Active airlines for the public carousel, in display order. */
+export async function getAirlines(activeOnly = true): Promise<Airline[]> {
+  if (!isSupabaseConfigured) return [];
+  try {
+    const supabase = await createClient();
+    let query = supabase
+      .from("airlines")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: true });
+    if (activeOnly) query = query.eq("is_active", true);
+    const { data, error } = await query;
+    if (error) throw error;
+    return (data as Airline[]) ?? [];
+  } catch {
+    return [];
   }
 }

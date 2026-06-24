@@ -29,8 +29,10 @@ export const mainNav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services & Tours", href: "/services" },
+  { label: "Airlines", href: "/airlines" },
   { label: "Destinations", href: "/destinations" },
   { label: "Packages", href: "/packages" },
+  { label: "DLM Group", href: "/dlm-group" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -65,7 +67,8 @@ export const services: {
   short: string;
   body: string;
   points: string[];
-  image: string;
+  /** site_images slot used to look up the (admin-editable) image. */
+  imageSlot: string;
 }[] = [
   {
     key: "travel-management",
@@ -77,7 +80,7 @@ export const services: {
       "Travel consolidation services",
       "Visa Assist, Travel Assist & Travel Insurance",
     ],
-    image: "/images/hero/travel-flatlay.png",
+    imageSlot: "service_travel-management",
   },
   {
     key: "luxury",
@@ -89,7 +92,7 @@ export const services: {
       "Wildlife and nature tours",
       "Tailored for discerning travellers within Botswana",
     ],
-    image: "/images/gallery/heritage-homestead.jpg",
+    imageSlot: "service_luxury",
   },
   {
     key: "family",
@@ -101,7 +104,7 @@ export const services: {
       "Mauritius island holidays",
       "Disneyland, Florida adventures",
     ],
-    image: "/images/gallery/sunset-game-drive.jpg",
+    imageSlot: "service_family",
   },
   {
     key: "health",
@@ -113,7 +116,7 @@ export const services: {
       "Indonesia & Thailand specialists",
       "Couples and individual itineraries",
     ],
-    image: "/images/gallery/luxury-tent-interior.jpg",
+    imageSlot: "service_health",
   },
   {
     key: "adventure",
@@ -125,7 +128,7 @@ export const services: {
       "Event planning & management",
       "Unique, off-the-beaten-track experiences",
     ],
-    image: "/images/hero/safari-vehicle.png",
+    imageSlot: "service_adventure",
   },
 ];
 
@@ -135,21 +138,21 @@ export const destinations = [
     blurb:
       "Our home and our heart — the Okavango Delta, Chobe, the Kalahari and the rich heritage of the Central Region.",
     places: ["Serowe & Palapye", "Okavango Delta", "Chobe", "Central Kalahari"],
-    image: "/images/hero/elephant-river.png",
+    imageSlot: "dest_botswana",
   },
   {
     region: "SADC Region",
     blurb:
       "Family-friendly escapes across Southern Africa, easy to reach and full of wonder.",
     places: ["South Africa", "Zimbabwe", "Zambia", "Namibia"],
-    image: "/images/hero/mokoro-delta.png",
+    imageSlot: "dest_sadc",
   },
   {
     region: "International",
     blurb:
       "From island holidays to wellness retreats and theme-park magic — the world, expertly arranged.",
     places: ["Mauritius", "Florida (Disneyland)", "Thailand", "Indonesia"],
-    image: "/images/hero/tented-camp.png",
+    imageSlot: "dest_international",
   },
 ] as const;
 

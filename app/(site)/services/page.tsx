@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { services } from "@/lib/site";
+import { getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Services & Tours",
@@ -14,14 +15,15 @@ export const metadata: Metadata = {
     "Travel management, luxury heritage tours in Serowe, family tours across SADC and beyond, health & wellness journeys, plus adventure tourism and events.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const images = await getSiteImages();
   return (
     <>
       <PageHero
         eyebrow="Services & Tours"
         title="Everything for the journey ahead"
         subtitle="From managed corporate travel to curated niche tours — explore how we can help."
-        image="/images/hero/travel-flatlay.png"
+        image={images.page_hero_services}
       />
 
       <section className="py-24">
@@ -42,7 +44,7 @@ export default function ServicesPage() {
                     )}
                   >
                     <Image
-                      src={svc.image}
+                      src={images[svc.imageSlot]}
                       alt={svc.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"

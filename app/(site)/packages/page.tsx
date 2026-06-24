@@ -4,7 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { PackagesExplorer } from "@/components/site/PackagesExplorer";
-import { getPublishedPackages } from "@/lib/queries";
+import { getPublishedPackages, getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Travel Packages",
@@ -16,7 +16,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function PackagesPage() {
-  const packages = await getPublishedPackages();
+  const [packages, images] = await Promise.all([
+    getPublishedPackages(),
+    getSiteImages(),
+  ]);
 
   return (
     <>
@@ -24,7 +27,7 @@ export default async function PackagesPage() {
         eyebrow="Packages"
         title="Curated journeys, ready to book"
         subtitle="Explore our latest travel packages — or ask us to design one just for you."
-        image="/images/hero/tented-camp.png"
+        image={images.page_hero_packages}
       />
 
       <section className="py-24">

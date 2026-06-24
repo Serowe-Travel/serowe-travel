@@ -13,6 +13,8 @@ import {
   Menu,
   X,
   ExternalLink,
+  ImageIcon,
+  Plane,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
@@ -20,6 +22,8 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/packages", label: "Packages", icon: Package },
+  { href: "/admin/airlines", label: "Airlines", icon: Plane },
+  { href: "/admin/images", label: "Images", icon: ImageIcon },
   { href: "/admin/enquiries", label: "Enquiries", icon: Inbox },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
@@ -27,9 +31,11 @@ const NAV = [
 export function Sidebar({
   name,
   role,
+  logoSrc,
 }: {
   name: string;
   role: string;
+  logoSrc: string;
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -48,7 +54,7 @@ export function Sidebar({
       <div className="flex items-center justify-between border-b border-sand bg-white px-4 py-3 lg:hidden">
         <Link href="/admin" className="flex items-center gap-2">
           <Image
-            src="/images/brand/logo.png"
+            src={logoSrc}
             alt=""
             width={32}
             height={32}
@@ -69,7 +75,7 @@ export function Sidebar({
       >
         <div className="hidden items-center gap-3 border-b border-sand px-6 py-5 lg:flex">
           <Image
-            src="/images/brand/logo.png"
+            src={logoSrc}
             alt=""
             width={40}
             height={40}

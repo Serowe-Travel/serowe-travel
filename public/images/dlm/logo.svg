@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="DLM Group">
+  <rect width="240" height="240" rx="28" fill="#6E1B2E"/>
+  <text x="120" y="116" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700" fill="#ffffff" text-anchor="middle">DLM</text>
+  <line x1="62" y1="138" x2="178" y2="138" stroke="#C0202B" stroke-width="3"/>
+  <text x="120" y="166" font-family="Arial, sans-serif" font-size="22" letter-spacing="8" fill="#C0202B" text-anchor="middle">GROUP</text>
+  <text x="120" y="196" font-family="Arial, sans-serif" font-size="12" letter-spacing="3" fill="#cbb9bd" text-anchor="middle">PTY LTD</text>
+</svg>
