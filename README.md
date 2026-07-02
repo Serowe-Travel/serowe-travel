@@ -24,7 +24,7 @@ npm run dev                  # http://localhost:3000
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Project Settings → API → `anon` `public` key |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → `service_role` key (server only — never expose) |
-| `CONTACT_EMAIL` | Email enquiries are sent to (default `sales@serowetravel.com`) |
+| `CONTACT_EMAIL` | Email enquiries are sent to (default `info@serowetravel.com`) |
 | `NEXT_PUBLIC_SITE_URL` | Public site URL (e.g. `https://serowetravel.com`) |
 
 The site runs without Supabase keys (packages stay hidden, enquiries fall back
@@ -60,7 +60,7 @@ The contact form (a Next.js **server action**) does two things:
 
 > ⚠️ **First-time activation:** FormSubmit requires you to confirm the address
 > once. Submit the live contact form a single time, then click the activation
-> link FormSubmit emails to `sales@serowetravel.com`. After that, all enquiries
+> link FormSubmit emails to `info@serowetravel.com`. After that, all enquiries
 > are delivered automatically.
 
 ---

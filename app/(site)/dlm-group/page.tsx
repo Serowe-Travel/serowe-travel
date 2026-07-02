@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import {
   GraduationCap,
   Laptop,
@@ -178,6 +179,60 @@ export default async function DlmGroupPage() {
                 )}
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Available — flyer */}
+      <section className="bg-white py-20">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#C0202B]">
+                Available
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-[#6E1B2E]">
+                Flight reservations, ready when you are
+              </h2>
+              <p className="mt-4 leading-relaxed text-[#58595B]">
+                Book your next flight through DLM Group and Serowe Travel. From
+                local departures to international routes, we secure competitive
+                fares and handle the reservation from start to finish.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {[
+                  "Local, regional & international flights",
+                  "Competitive, real-time fares",
+                  "Reservations handled end-to-end",
+                ].map((point) => (
+                  <li
+                    key={point}
+                    className="flex items-start gap-2.5 text-[#58595B]"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C0202B]" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/contact"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#6E1B2E] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#551320]"
+              >
+                Make a reservation <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <Reveal className="flex justify-center">
+              <div className="overflow-hidden rounded-3xl border border-[#6E1B2E]/10 bg-white shadow-card">
+                <Image
+                  src="/images/flightreservationflyer.jpeg"
+                  alt="DLM Group flight reservation flyer"
+                  width={854}
+                  height={1280}
+                  className="h-auto w-full max-w-md"
+                />
+              </div>
+            </Reveal>
           </div>
         </Container>
       </section>

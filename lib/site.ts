@@ -10,7 +10,7 @@ export const site = {
   description:
     "Serowe Travel is an IATA-accredited, Amadeus-partnered travel agency specialising in luxury and sustainable travel across Botswana and the world.",
   url: "https://serowetravel.com",
-  email: "sales@serowetravel.com",
+  email: "info@serowetravel.com",
   phones: ["+267 71 45 9292", "+267 71 43 2118"],
   whatsapp: "+267 71 45 9292",
   address: {
