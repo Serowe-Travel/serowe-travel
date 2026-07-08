@@ -78,6 +78,7 @@ export async function submitEnquiry(
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          Referer: site.url,
         },
         body: JSON.stringify({
           _subject: `New enquiry — ${data.subject || data.package || "Website"}`,
@@ -94,6 +95,7 @@ export async function submitEnquiry(
     const json = (await res.json().catch(() => ({}))) as {
       success?: string | boolean;
     };
+    console.log("[FormSubmit debug] status:", res.status, "body:", json);
     const emailOk =
       res.ok && (json.success === "true" || json.success === true);
 
@@ -105,7 +107,8 @@ export async function submitEnquiry(
           CONTACT_EMAIL,
       };
     }
-  } catch {
+  } catch (err) {
+    console.log("[FormSubmit debug] fetch threw:", err);
     if (!isSupabaseConfigured) {
       return {
         ok: false,

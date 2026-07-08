@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 // DLM brand palette (kept local to this page so it doesn't affect the
 // site-wide Serowe Travel gold theme).
-// burgundy #6E1B2E · red #C0202B · gray #58595B · white
+// burgundy #560000 · red #C0202B · gray #58595B · white
 
 const featuredServices = [
   {
@@ -90,7 +90,7 @@ export default async function DlmGroupPage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal className="flex justify-center lg:justify-start">
-              <div className="relative h-56 w-56 overflow-hidden rounded-3xl border border-[#6E1B2E]/15 bg-white p-6 shadow-card">
+              <div className="relative h-56 w-56 overflow-hidden rounded-3xl border border-[#560000]/15 bg-white p-6 shadow-card">
                 <Image
                   src={images.dlm_logo}
                   alt="DLM Group"
@@ -105,7 +105,7 @@ export default async function DlmGroupPage() {
               <p className="text-sm font-semibold uppercase tracking-widest text-[#C0202B]">
                 Who we are
               </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-[#6E1B2E]">
+              <h2 className="mt-3 font-display text-3xl font-semibold text-[#560000]">
                 Solution-driven service, globally connected
               </h2>
               <p className="mt-4 leading-relaxed text-[#58595B]">
@@ -116,7 +116,7 @@ export default async function DlmGroupPage() {
                 is part of the DLM Group.
               </p>
 
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#6E1B2E]/8 px-4 py-2 text-sm font-medium text-[#6E1B2E]">
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#560000]/8 px-4 py-2 text-sm font-medium text-[#560000]">
                 <BadgeCheck size={18} className="text-[#C0202B]" />
                 IATA accredited
               </div>
@@ -126,7 +126,7 @@ export default async function DlmGroupPage() {
                 {motto.map(({ Icon, label }) => (
                   <span
                     key={label}
-                    className="inline-flex items-center gap-2 rounded-full bg-[#6E1B2E] px-5 py-2.5 text-sm font-semibold text-white"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#560000] px-5 py-2.5 text-sm font-semibold text-white"
                   >
                     <Icon size={16} className="text-[#E8A0A8]" />
                     {label}
@@ -145,7 +145,7 @@ export default async function DlmGroupPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-[#C0202B]">
               What we do
             </p>
-            <h2 className="mt-3 font-display text-3xl font-semibold text-[#6E1B2E]">
+            <h2 className="mt-3 font-display text-3xl font-semibold text-[#560000]">
               Our core services
             </h2>
           </div>
@@ -155,12 +155,12 @@ export default async function DlmGroupPage() {
               <Reveal
                 key={svc.title}
                 delay={(i % 2) * 100}
-                className="group rounded-3xl border border-[#6E1B2E]/10 bg-white p-8 shadow-soft transition-transform duration-300 hover:-translate-y-1"
+                className="group rounded-3xl border border-[#560000]/10 bg-white p-8 shadow-soft transition-transform duration-300 hover:-translate-y-1"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#6E1B2E]/8 text-[#6E1B2E]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#560000]/8 text-[#560000]">
                   <svc.Icon size={28} />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold text-[#6E1B2E]">
+                <h3 className="mt-5 font-display text-xl font-semibold text-[#560000]">
                   {svc.title}
                 </h3>
                 <p className="mt-2 leading-relaxed text-[#58595B]">{svc.body}</p>
@@ -191,7 +191,7 @@ export default async function DlmGroupPage() {
               <p className="text-sm font-semibold uppercase tracking-widest text-[#C0202B]">
                 Available
               </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-[#6E1B2E]">
+              <h2 className="mt-3 font-display text-3xl font-semibold text-[#560000]">
                 Flight reservations, ready when you are
               </h2>
               <p className="mt-4 leading-relaxed text-[#58595B]">
@@ -216,14 +216,14 @@ export default async function DlmGroupPage() {
               </ul>
               <Link
                 href="/contact"
-                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#6E1B2E] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#551320]"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#560000] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#3D0000]"
               >
                 Make a reservation <ArrowRight size={16} />
               </Link>
             </div>
 
             <Reveal className="flex justify-center">
-              <div className="overflow-hidden rounded-3xl border border-[#6E1B2E]/10 bg-white shadow-card">
+              <div className="overflow-hidden rounded-3xl border border-[#560000]/10 bg-white shadow-card">
                 <Image
                   src="/images/flightreservationflyer.jpeg"
                   alt="DLM Group flight reservation flyer"
@@ -238,7 +238,7 @@ export default async function DlmGroupPage() {
       </section>
 
       {/* Contact + motto footer */}
-      <section className="bg-[#6E1B2E] py-20 text-white">
+      <section className="bg-[#560000] py-20 text-white">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
@@ -286,7 +286,7 @@ export default async function DlmGroupPage() {
                 {motto.map(({ Icon, label }) => (
                   <span
                     key={label}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#6E1B2E]"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#560000]"
                   >
                     <Icon size={16} className="text-[#C0202B]" />
                     {label}
@@ -302,7 +302,7 @@ export default async function DlmGroupPage() {
               <Button
                 href="/contact"
                 variant="light"
-                className="mt-8 w-fit !text-[#6E1B2E]"
+                className="mt-8 w-fit !text-[#560000]"
               >
                 Start a conversation <ArrowRight size={16} />
               </Button>
