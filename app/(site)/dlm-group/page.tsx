@@ -70,7 +70,6 @@ const motto = [
 
 const contacts = [
   { name: "Dimakatso Leteane", phones: ["71 459 292", "76 991 195"] },
-  { name: "Onalethata Pelotona", phones: ["77 861 883", "71 432 118"] },
 ];
 
 export default async function DlmGroupPage() {

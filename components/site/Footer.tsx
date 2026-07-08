@@ -9,6 +9,7 @@ import {
   LinkedinIcon,
 } from "@/components/site/SocialIcons";
 import { getSiteSettings } from "@/lib/queries";
+import { BackToTop } from "@/components/site/BackToTop";
 
 export async function Footer({ logoSrc }: { logoSrc: string }) {
   const settings = await getSiteSettings();
@@ -124,7 +125,11 @@ export async function Footer({ logoSrc }: { logoSrc: string }) {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream/15 pt-6 text-xs text-cream/50 sm:flex-row">
+        <div className="mt-12 flex justify-center border-t border-cream/15 pt-8">
+          <BackToTop />
+        </div>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 pt-2 text-xs text-cream/50 sm:flex-row">
           <p>
             © {new Date().getFullYear()} Serowe Travel. All rights reserved.
           </p>
