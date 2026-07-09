@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import { AirlineCarousel } from "@/components/site/AirlineCarousel";
+import { AirlineGrid } from "@/components/site/AirlineGrid";
 import { getAirlines, getSiteImages } from "@/lib/queries";
 
 export const metadata: Metadata = {
@@ -39,7 +39,7 @@ export default async function AirlinesPage() {
 
           {airlines.length > 0 ? (
             <Reveal className="mt-14">
-              <AirlineCarousel airlines={airlines} />
+              <AirlineGrid airlines={airlines} />
             </Reveal>
           ) : (
             <div className="mx-auto mt-12 max-w-xl rounded-3xl border border-sand bg-white p-12 text-center shadow-soft">

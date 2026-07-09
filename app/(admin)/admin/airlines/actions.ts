@@ -21,12 +21,12 @@ export async function createAirline(
   _prev: AirlineActionState,
   formData: FormData,
 ): Promise<AirlineActionState> {
+  // Name/link/description are optional (the public page shows logos only).
   const name = String(formData.get("name") ?? "").trim();
   const logo_url = String(formData.get("logo_url") ?? "").trim();
   const link_url = normaliseUrl(String(formData.get("link_url") ?? ""));
   const description = String(formData.get("description") ?? "").trim() || null;
 
-  if (!name) return { ok: false, message: "Airline name is required." };
   if (!logo_url) return { ok: false, message: "Please upload a logo." };
 
   const supabase = await createClient();

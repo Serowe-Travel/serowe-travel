@@ -51,8 +51,9 @@ function AddAirlineForm() {
   const [state, action, pending] = useActionState(createAirline, initial);
   const [logo, setLogo] = useState<string[]>([]);
 
-  const fieldCls =
-    "mt-1.5 w-full rounded-xl border border-sand bg-white px-4 py-2.5 text-ink outline-none focus:border-gold focus:ring-2 focus:ring-gold/30";
+  // Styling for the optional text fields (commented out below):
+  // const fieldCls =
+  //   "mt-1.5 w-full rounded-xl border border-sand bg-white px-4 py-2.5 text-ink outline-none focus:border-gold focus:ring-2 focus:ring-gold/30";
 
   return (
     <form
@@ -62,10 +63,18 @@ function AddAirlineForm() {
       <h2 className="font-display text-lg font-semibold text-ink">
         Add an airline
       </h2>
+      <p className="mt-1 text-sm text-ink-soft">
+        Upload a logo — that&apos;s all that&apos;s shown on the website.
+      </p>
+
+      {/*
+        Name, website link and description are not shown on the public
+        airlines page (logos only), so they're disabled here. Uncomment to
+        re-enable — the backend still stores these fields.
 
       <label className="mt-4 block">
         <span className="text-sm font-medium text-ink">Airline name</span>
-        <input name="name" type="text" required className={fieldCls} />
+        <input name="name" type="text" className={fieldCls} />
       </label>
 
       <label className="mt-4 block">
@@ -92,6 +101,7 @@ function AddAirlineForm() {
           className={`${fieldCls} resize-y`}
         />
       </label>
+      */}
 
       <div className="mt-4">
         <ImageUploader value={logo} onChange={setLogo} label="Logo / image" />
@@ -190,7 +200,9 @@ function AirlineRow({
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium text-ink">{airline.name}</p>
+        <p className="truncate font-medium text-ink">
+          {airline.name || "Airline logo"}
+        </p>
         {airline.description && (
           <p className="truncate text-sm text-ink-soft">
             {airline.description}
